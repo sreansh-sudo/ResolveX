@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% block title %}Home | SupportApp{% endblock title %}
+
+{% block style %}
+body {
+  background: linear-gradient(to right, #667eea, #764ba2);
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+}
+
+.navbar {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-brand, .nav-link {
+  color: #fff !important;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f0f0f0;
+  min-width: 140px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 1000;
+  border-radius: 6px;
+  padding: 0.5rem 0;
+}
+
+.custom-dropdown:hover .custom-dropdown-menu {
+  display: block;
+}
+
+.custom-dropdown .dropdown-link {
+  display: block;
+  padding: 8px 16px;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.custom-dropdown .dropdown-link:hover {
+  background-color: #ddd;
+}
+
+.home-content {
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.home-content h1 {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.home-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.info-card {
+  background-color: #fff;
+  color: #333;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  transition: transform 0.3s;
+}
+
+.info-card:hover {
+  transform: translateY(-8px);
+}
+
+.info-card h4 {
+  color: #667eea;
+  font-weight: bold;
+}
+
+footer {
+  margin-top: 4rem;
+  padding: 1rem;
+  text-align: center;
+  color: #ddd;
+  font-size: 0.9rem;
+}
+{% endblock style %}
+
+{% block body %}
+{% include "messages.html" %}
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">SupportApp</a>
+    <div class="collapse navbar-collapse justify-content-end">
+      <ul class="navbar-nav">
+
+        <!-- User Menu -->
+        <li class="nav-item custom-dropdown">
+          <span class="nav-link">User</span>
+          <div class="custom-dropdown-menu">
+            <a href="/login" class="dropdown-link">Login</a>
+            <a href="/signup" class="dropdown-link">Sign Up</a>
+          </div>
+        </li>
+
+        <!-- Agent Menu -->
+        <li class="nav-item custom-dropdown ms-3">
+          <span class="nav-link">Agent</span>
+          <div class="custom-dropdown-menu">
+            <a href="/agent-login" class="dropdown-link">Login</a>
+            <a href="/agent-signup" class="dropdown-link">Sign Up</a>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="home-content">
+  <h1>Welcome {{username}}</h1>
+  <p>Manage customer support cases, track progress, and resolve issues efficiently.</p>
+
+  <div class="card-container">
+    <div class="info-card">
+      <h4>Submit a Case</h4>
+      <p>Customers can submit support cases with issue details and track their resolution progress.</p>
+    </div>
+    <div class="info-card">
+      <h4>Manage Cases</h4>
+      <p>Support agents can assign, update, and resolve cases easily through the dashboard.</p>
+    </div>
+    <div class="info-card">
+      <h4>Real-Time Tracking</h4>
+      <p>Both customers and agents can monitor case status and get notified of updates.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  &copy; 2025 SupportApp. All rights reserved.
+</footer>
+{% endblock body %}

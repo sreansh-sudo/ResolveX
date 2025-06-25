@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Agent Login | SupportApp{% endblock title %}
+{% block style %}
+body {
+      background: linear-gradient(to right, #667eea, #764ba2);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .login-card {
+      background: #fff;
+      padding: 2rem 2.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .login-card h2 {
+      margin-bottom: 1.5rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .btn-primary {
+      background-color: #667eea;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #5a67d8;
+    }
+
+    .form-text a {
+      color: #667eea;
+      text-decoration: none;
+    }
+
+    .form-text a:hover {
+      text-decoration: underline;
+    }
+{% endblock style %}
+
+{% block body %}
+<div class="login-card">
+    <h2 class="text-center">Agent Portal Login</h2>
+    <form method="POST" action="/agent-login">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" class="form-control" id="email" name="email" required />
+      </div>
+      
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required />
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
+
+      <div class="form-text text-center mt-3">
+        Don't have an account? <a href="/agent-signup">Signup</a>
+      </div>
+
+    </form>
+  </div>
+{% endblock body %}

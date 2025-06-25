@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block title %}Agent Dashboard | SupportApp{% endblock title %}
+
+{% block style %}
+body {
+  background: linear-gradient(to right, #667eea, #764ba2);
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+}
+
+.navbar {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-brand, .nav-link {
+  color: #fff !important;
+  font-weight: 500;
+}
+
+.dashboard-content {
+  padding: 4rem 2rem;
+}
+
+.dashboard-content h1 {
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.table-container {
+  background-color: #fff;
+  color: #333;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  max-width: 1000px;
+  margin: auto;
+  overflow-x: auto;
+}
+
+.table th {
+  color: #667eea;
+}
+
+footer {
+  margin-top: 4rem;
+  padding: 1rem;
+  text-align: center;
+  color: #ddd;
+  font-size: 0.9rem;
+}
+{% endblock style %}
+
+{% block body %}
+{% include "messages.html" %}
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">SupportApp</a>
+    <div class="collapse navbar-collapse justify-content-end">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Dashboard Content -->
+<div class="dashboard-content">
+  <h1>Welcome, Agent {{ agent_name }}</h1>
+
+  <div class="table-container">
+    <h4>Assigned Support Cases</h4>
+    <table class="table table-striped table-hover mt-3">
+      <thead>
+        <tr>
+          <th scope="col">Case ID</th>
+          <th scope="col">Customer Name</th>
+          <th scope="col">Issue</th>
+          <th scope="col">Priority</th>
+          <th scope="col">Status</th>
+          <th scope="col">Date Submitted</th>
+        </tr>
+      <tbody>
+  {% for case in assigned_cases %}
+  <tr>
+    <td>{{ case.case_id }}</td>
+    <td>{{ case.user.username }}</td>
+    <td>{{ case.issueDescription }}</td>
+    <td>{{ case.priority }}</td>
+    <td>
+      <form method="POST" action="{{ url_for('update_status') }}">
+        <input type="hidden" name="case_id" value="{{ case.case_id }}">
+        <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
+          <option value="In Progress" {% if case.status == 'In Progress' %}selected{% endif %}>In Progress</option>
+          <option value="Resolved" {% if case.status == 'Resolved' %}selected{% endif %}>Resolved</option>
+        </select>
+      </form>
+    </td>
+    <td>{{ case.datesubmitted.strftime('%Y-%m-%d') }}</td>
+  </tr>
+  {% else %}
+  <tr>
+    <td colspan="6" class="text-center">No cases assigned.</td>
+  </tr>
+  {% endfor %}
+</tbody>
+
+    </table>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  &copy; 2025 SupportApp. All rights reserved.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock body %}

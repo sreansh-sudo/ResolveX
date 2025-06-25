@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | {{username}}{% endblock title %}
+{% block style %}
+body {
+      background: linear-gradient(to right, #667eea, #764ba2);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+    }
+
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar-brand, .nav-link {
+      color: #fff !important;
+      font-weight: 500;
+    }
+
+    .dashboard-container {
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+
+    .dashboard-container h1 {
+      font-weight: bold;
+      margin-bottom: 2rem;
+    }
+
+    .action-card {
+      background-color: #fff;
+      color: #333;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 300px;
+      transition: transform 0.3s;
+      text-decoration: none;
+    }
+
+    .action-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-title {
+      font-weight: bold;
+      color: #667eea;
+    }
+
+    .card-text {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 4rem;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+{% endblock style %}
+{% block body %}
+<!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">SupportApp</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Dashboard -->
+  <div class="dashboard-container">
+    <h1>Welcome, {{username}}</h1>
+    <p>Select an action below to get started.</p>
+
+    <div class="card-grid">
+      <a href="/lodge-case" class="action-card text-decoration-none">
+        <h4 class="card-title">Lodge a Case</h4>
+        <p class="card-text">Submit a new support request with issue details and priority.</p>
+      </a>
+
+      <a href="/my-cases" class="action-card text-decoration-none">
+        <h4 class="card-title">My Cases</h4>
+        <p class="card-text">View submitted cases, status updates, and agent notes.</p>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 SupportApp. All rights reserved.
+  </footer>
+{% endblock body %}

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Lodge a Case | SupportApp{% endblock title %}
+{% block style %}
+body {
+      background: linear-gradient(to right, #667eea, #764ba2);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+      padding: 1rem;
+    }
+
+    .case-form-card {
+      background-color: #fff;
+      padding: 2rem 2.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .case-form-card h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .btn-primary {
+      background-color: #667eea;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #5a67d8;
+    }
+
+    label {
+      font-weight: 500;
+    }
+{% endblock style %}
+{% block body %}
+<div class="case-form-card">
+    <h2>Lodge a Support Case</h2>
+    <form method="POST" action="">
+
+      <div class="mb-3">
+        <label for="issue_description" class="form-label">Issue Description</label>
+        <textarea class="form-control" id="issue_description" name="issue_description" rows="4" required></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="priority" class="form-label">Priority Level</label>
+        <select class="form-select" id="priority" name="priority" required>
+          <option value="">Select priority</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+          <option value="Urgent">Urgent</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="date" class="form-label">Date of Submission</label>
+        <input type="date" class="form-control" id="date" name="date_of_submission" required />
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary">Submit Case</button>
+      </div>
+    </form>
+  </div>
+{% endblock body %}
