@@ -3,20 +3,24 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
+from dotenv import load_dotenv
+import os
 
+# Load environment variables from .env
+load_dotenv()
 
 local_server = True
 
 # create the app
 app = Flask(__name__)
-app.secret_key = b"Sreansh#2006"
+app.secret_key = os.getenv(b"SECRECT_KEY")
 
 # User Session
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
 # configure the SQLite database, relative to the app instance folder
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:@localhost/sap"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URI")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # initialize the app with the extension
