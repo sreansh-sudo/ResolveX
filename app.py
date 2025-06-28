@@ -13,7 +13,7 @@ local_server = True
 
 # create the app
 app = Flask(__name__)
-app.secret_key = os.getenv(b"SECRECT_KEY")
+app.secret_key = os.getenv("SECRECT_KEY")
 
 # User Session
 login_manager = LoginManager(app)
