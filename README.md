@@ -1,78 +1,27 @@
-# 🚀 ResolveX - Support Case Management System
+# 💬 ResolveX — AI-Powered Support Chat System
 
-**ResolveX** is a robust and user-friendly support case management system designed to streamline the process of logging, assigning, and resolving customer support issues. It features role-based access for **Customers**, **Support Agents**, and **Managers**.
+ResolveX is an intelligent, modular, and scalable support system that blends human agents and AI capabilities. Built for seamless customer support, it provides real-time chat functionality, role-based access control, and a customizable workflow for customers, agents, and managers.
 
-Built with **Flask**, **SQLAlchemy**, and **MySQL**, ResolveX provides a real-world simulation of a helpdesk system with clean UI and secure login features.
+## 🚀 Features
 
----
+- 🧠 **AI-Powered Chatbot Integration**  
+  Integrated with LLM-based AI to assist customers with common queries, reducing human workload.
 
-## 🔧 Features
+- 🔐 **Role-Based Login System**  
+  Separate dashboards and functionalities for:
+  - **Customers** – Raise support requests and chat.
+  - **Agents** – Respond to assigned tickets and manage conversations.
+  - **Managers** – View all tickets, assign agents, and oversee performance.
 
-### 🧑‍💻 Customer
-- Register and login securely
-- Lodge new support cases
-- View personal case status updates
+- 📁 **Case Management System**  
+  Ticket lifecycle management with statuses like `Open`, `In Progress`, `Resolved`, and `Closed`.
 
-### 👨‍🔧 Support Agent
-- Login and view assigned cases
-- Update the status of assigned cases
+- 📨 **Live Chat Interface**  
+  Real-time messaging with human agents and AI, built using modern web technologies.
 
-### 👨‍💼 Manager
-- View all support cases
-- Assign cases to available agents
-- Promote streamlined case resolution
-
----
-
-## 🏗️ Tech Stack
-
-- **Frontend**: HTML, CSS (Bootstrap/Jinja2 Templates)
-- **Backend**: Python (Flask)
-- **Database**: MySQL or SQLite (via SQLAlchemy ORM)
-- **Authentication**: Flask-Login
-- **Password Security**: Werkzeug (Hashing)
-- **Environment Management**: python-dotenv
-
----
-
-## 🔐 Security & Environment
-
-- Environment variables managed via `.env` file
-  - `SECRECT_KEY` for Flask session
-  - `DATABASE_URI` for SQLAlchemy connection
-
-Example `.env`:
-
-```env
-SECRECT_KEY=your_super_secret_key
-DATABASE_URI=sqlite:///database.db
-```
-## 🚀 Getting Started
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/sreansh-sudo/resolvex.git
-cd resolvex
-```
-### 2. Create Virtual Environment and Install Dependencies
-
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
-```
-### 3. Set Up Environment
-
-Create a `.env` file in the root directory:
-
-```env
-SECRECT_KEY=your_super_secret_key
-DATABASE_URI=sqlite:///database.db  # or your MySQL URI
-```
-### 4. Run the App
-
-```bash
-python app.py
-Then open your browser and go to : http://127.0.0.1:5000
-```
+- 🛠️ **Tech Stack**
+  - **Backend**: Flask, Flask-Login, SQLAlchemy
+  - **Frontend**: HTML, CSS (custom or Bootstrap), JavaScript
+  - **Database**: MySQL / SQLite
+  - **AI Integration**: Google Gemini API
+  - **Authentication**: Secure session-based login
