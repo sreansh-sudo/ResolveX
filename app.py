@@ -4,6 +4,7 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
 from dotenv import load_dotenv
+from ai_agent import get_ai_response
 import os
 
 # Load environment variables from .env
@@ -13,7 +14,8 @@ local_server = True
 
 # create the app
 app = Flask(__name__)
-app.secret_key = os.getenv("SECRECT_KEY")
+app.secret_key = os.getenv("SECRET_KEY")
+
 
 # User Session
 login_manager = LoginManager(app)
@@ -318,6 +320,33 @@ def update_status():
         flash("Unauthorized or case not found.", "danger")
     
     return redirect(url_for("agent_dashboard"))
+
+@app.route('/test-ai')
+def test_ai():
+    from ai_agent import get_ai_response
+    reply, _ = get_ai_response("Hello", [])
+    return reply
+
+
+@app.route("/chat", methods=["GET", "POST"])
+def chat():
+    # Ensure only logged-in users can chat
+    if "username" not in session:
+        return redirect(url_for("home"))
+
+    if "chat_history" not in session:
+        session["chat_history"] = []
+
+    history = session["chat_history"]
+
+    if request.method == "POST":
+        message = request.form["message"]
+        reply, updated_history = get_ai_response(message, history)
+        session["chat_history"] = updated_history
+        history = updated_history
+
+    return render_template("chat.html", history=history)
+
 
 # Run
 if __name__ == "__main__":

@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% block title %}ResolveX AI Chat{% endblock title %}
+
+{% block style %}
+    body {
+        background: linear-gradient(to right, #667eea, #764ba2);
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar-brand, .nav-link {
+      color: #fff !important;
+      font-weight: 500;
+    }
+
+    .chat-container {
+        max-width: 720px;
+        margin: 40px auto;
+        background-color: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        color: #333;
+    }
+
+    .chat-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .chat-header h3 {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .chat-history {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-height: 400px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+        scroll-behavior: smooth;
+    }
+
+    .message-row {
+        display: flex;
+    }
+
+    .message-row.user {
+        justify-content: flex-end;
+    }
+
+    .message-row.ai {
+        justify-content: flex-start;
+    }
+
+    .chat-bubble {
+        padding: 12px 18px;
+        border-radius: 18px;
+        max-width: 75%;
+        line-height: 1.5;
+        font-size: 15px;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .chat-bubble.user {
+        background-color: #d1e7dd;
+        align-self: flex-end;
+    }
+
+    .chat-bubble.ai {
+        background-color: #e2e3e5;
+        align-self: flex-start;
+    }
+
+    .chat-form .input-group {
+        gap: 8px;
+    }
+
+    .back-btn {
+        display: inline-block;
+        margin-bottom: 20px;
+        text-decoration: none;
+        background-color: #4c6ef5;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 10px;
+        transition: background-color 0.3s;
+    }
+
+    .back-btn:hover {
+        background-color: #3b5bdb;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (max-width: 576px) {
+        .chat-container {
+            margin: 20px 10px;
+            padding: 20px;
+        }
+        .chat-bubble {
+            font-size: 14px;
+        }
+    }
+{% endblock style %}
+{% block body %}
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">SupportApp</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<div class="container chat-container mt-4">
+  <div class="chat-header">
+    <h3>ResolveX AI Support Assistant</h3>
+    <p class="text-muted" style="font-size: 14px;">How can I help you today?</p>
+  </div>
+
+  <div class="chat-history">
+    {% for msg in history %}
+      {% set css_role = 'user' if msg.role == 'user' else 'ai' %}
+      <div class="message-row {{ css_role }}">
+        <div class="chat-bubble {{ css_role }}">
+          <strong>{{ "You" if msg.role == "user" else "ResolveX AI" }}</strong><br>
+          {{ msg.content }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <form method="POST" class="chat-form">
+    <div class="input-group">
+      <input name="message" id="message" type="text" class="form-control" placeholder="Type your message..." required>
+      <button type="submit" class="btn btn-primary px-4">Send</button>
+    </div>
+  </form>
+</div>
+{% endblock body %}
